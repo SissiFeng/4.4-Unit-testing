@@ -1,107 +1,84 @@
-# Bayesian Optimization
-Adapt a Bayesian optimization script to perform color matching.
+# Unit Testing Assignment: Color Mixer
 
-## The assignment
-The tests are failing right now because the [`bayesian_optimization.py`](bayesian_optimization.py) script is not fully implemented. Fixing this up will make the tests green. Wherever you see `...` within the script requires you to write your own code. See below for instructions.
+## 📚 Introduction
 
-Refer to [the Ax Service API tutorial](https://ax.dev/tutorials/gpei_hartmann_service.html) if you get stuck.
+This assignment focuses on unit testing using pytest. You'll implement a ColorMixer class and write unit tests to ensure its functionality. This exercise will help you understand the importance of unit testing, how to write and run tests, interpret test results, and practice test-driven development.
 
-### Ax parameter configuration
+## 🎯 Objectives
 
-Use `"R"`, `"G"`, and `"B"` as the parameter names. Use 0 and 255 as lower and upper
-*integer* bounds, respectively. Note that Python interprets 0.0 and 255.0 as
-continuous variables ("floats"), and 0 and 255 as integers. As an example, the
-2D Branin function parameters would look like:
+By the end of this assignment, you should be able to:
 
-```python
-parameters = [
-   {"name": "x1", "type": "range", "bounds": [-5.0, 10.0]},
-   {"name": "x2", "type": "range", "bounds": [0.0, 10.0]},
-]
-```
+1. Explain the purpose of unit tests
+2. Write unit tests using pytest
+3. Run and interpret unit test results
+4. Debug code based on test results
+5. Understand and apply test-driven development principles
 
-Likewise, the parameter configuration for the Hartmann6 function would look like:
-```python
-[
-    {"name": "x1", "type": "range", "bounds": [0.0, 1.0]},
-    {"name": "x2", "type": "range", "bounds": [0.0, 1.0]},
-    {"name": "x3", "type": "range", "bounds": [0.0, 1.0]},
-    {"name": "x4", "type": "range", "bounds": [0.0, 1.0]},
-    {"name": "x5", "type": "range", "bounds": [0.0, 1.0]},
-    {"name": "x6", "type": "range", "bounds": [0.0, 1.0]},
-]
-```
+## 🛠️ Setup
 
-See the ["Set up experiment"](https://ax.dev/tutorials/gpei_hartmann_service.html#2.-Set-up-experiment) section from the Ax Service API tutorial for additional context.
+1. Ensure you have Python installed in your environment.
+2. Install pytest by running `pip install pytest` in your terminal.
+3. Open the `color_mixer.py` file in your preferred IDE or text editor.
 
-### Using the LightMixer class
+## 📝 Instructions
 
-In this assignment, you will use the `run_color_experiment` and `calculate_objective` methods from the [LightMixer](src/mock_light_mixer/_mock_light_mixer.py) class contained in the `mock_light_mixer` package, which comes preinstalled in your Codespace. Here is some example code for how to use it:
+### Step 1: Implement the ColorMixer class
 
-```python
-from mock_light_mixer import LightMixer
+Open `color_mixer.py` and implement the following methods in the ColorMixer class:
 
-target_color = {"R": 255, "G": 127, "B": 63}
+1. `mix_colors(color1, color2)`: Mix two colors and return the result.
+2. `lighten_color(color, amount)`: Lighten a color by a certain amount.
+3. `darken_color(color, amount)`: Darken a color by a certain amount.
 
-parameterization = {"R": 10, "G": 20, "B": 15}
+### Step 2: Write unit tests
 
-mixer = LightMixer(target_color=target_color)
+Open `test_color_mixer.py` and review the existing tests. Add more tests as needed to ensure comprehensive coverage of the ColorMixer class functionality.
 
-# Use the run_color_experiment method from the instantiated LightMixer class to
-# run an experiment with a certain parameterization
-R = parameterization["R"]
-G = parameterization["G"]
-B = parameterization["B"]
-sensor_data = mixer.run_color_experiment(R, G, B)
-```
+### Step 3: Run the tests
 
-Likewise, you can use the `calculate_objective` method to calculate the objective function value for a given parameterization:
+1. Open a terminal in your project directory.
+2. Run the command: `pytest test_color_mixer.py`
+3. Observe the test results and any error messages.
 
-```python
-from mock_light_mixer import LightMixer
+### Step 4: Debug and improve your implementation
 
-target_color = {"R": 255, "G": 127, "B": 63}
+1. If any tests fail, read the error messages carefully.
+2. Go back to `color_mixer.py`, revise your code, and try again.
+3. Repeat steps 3 and 4 until all tests pass.
 
-sensor_data = {
-    "ch410": 102.2,
-    "ch440": 220.4,
-    "ch470": 225.6,
-    "ch510": 178.8,
-    "ch550": 191.6,
-    "ch583": 204.4,
-    "ch620": 217.2,
-    "ch670": 230.0,
-}
+### Step 5: Practice Test-Driven Development
 
-mixer = LightMixer(target_color=target_color)
+1. Think of a new feature or edge case for the ColorMixer class.
+2. Write a new test in `test_color_mixer.py` for this feature or case.
+3. Run the tests and see the new test fail.
+4. Implement the feature or handle the edge case in `color_mixer.py`.
+5. Run the tests again and ensure all tests, including the new one, pass.
 
-objective_function_value = mixer.calculate_objective(sensor_data)
-```
+## 🧪 Testing
 
-This objective is the mean absolute error (MAE) between the target sensor data and the observed sensor data. While you do not need to implement this yourself, for your reference, the MAE between the values in two dictionaries with identical keys can be computed as shown below. Note that the keys from `dict1` are used to index the values for both `dict1` and `dict2`.
+The `test_color_mixer.py` file contains tests for each method in the ColorMixer class. These tests check both the correctness of your implementation and handle invalid inputs.
 
-```python
-from sklearn.metrics import mean_absolute_error
+## 📈 Completion Criteria
 
-dict1 = {'a': 1, 'b': 2, 'c': 3}
-dict2 = {'a': 1, 'b': 4, 'c': 7}
+You've completed the assignment when:
 
-keys = dict1.keys()
-dict1_values = [dict1[key] for key in keys]
-dict2_values = [dict2[key] for key in keys]
+1. All methods in the ColorMixer class are correctly implemented.
+2. All tests in `test_color_mixer.py` pass when you run `pytest test_color_mixer.py`.
+3. You've added at least one new test and corresponding functionality using the Test-Driven Development approach.
 
-mae = mean_absolute_error(dict1_values, dict2_values)
-print(mae)
-# 2.0
-```
+## 💡 Tips
 
-NOTE: the code above assumes the values are all numeric.
+- Start by implementing the simplest functionality that could work.
+- Use the test results to guide your implementation.
+- Remember to handle edge cases and invalid inputs.
+- Don't hesitate to add more tests if you think of additional scenarios to cover.
 
-### Stuck?
+## 🆘 Getting Help
 
-Refer to https://ax.dev/tutorials/gpei_hartmann_service.html and the course tutorial content.
+If you encounter any issues or have questions:
 
-### Run command
-`pytest`
+1. Review this README file and the comments in `color_mixer.py` carefully.
+2. Check the pytest documentation for guidance on writing and running tests.
+3. If you're still stuck, reach out to your instructor or teaching assistant for help.
 
-You can also use the "Testing" sidebar extension to easily run individual tests.
+Good luck, and happy testing! 🧪🔬

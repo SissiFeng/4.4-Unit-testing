@@ -30,15 +30,19 @@ Open `color_mixer.py` and implement the following methods in the ColorMixer clas
 2. `lighten_color(color, amount)`: Lighten a color by a certain amount.
 3. `darken_color(color, amount)`: Darken a color by a certain amount.
 
-### Step 2: Write unit tests
+### Step 2: Review the unit tests
 
-Open `test_color_mixer.py` and review the existing tests. Add more tests as needed to ensure comprehensive coverage of the ColorMixer class functionality.
+Before implementing the ColorMixer class, take a moment to review the tests in `test_color_mixer.py`. This will give you a clear understanding of what each method should do and what edge cases to consider. Don't modify the tests, but use them as a guide for your implementation.
 
-### Step 3: Run the tests
+### Step 3: Implement the ColorMixer class
 
-1. Open a terminal in your project directory.
-2. Run the command: `pytest test_color_mixer.py`
-3. Observe the test results and any error messages.
+Now, open `color_mixer.py` and implement the following methods in the ColorMixer class:
+
+1. `mix_colors(color1, color2)`: Mix two colors and return the result.
+2. `lighten_color(color, amount)`: Lighten a color by a certain amount.
+3. `darken_color(color, amount)`: Darken a color by a certain amount.
+
+Use the tests as a guide for your implementation, ensuring that your methods will pass all the provided tests.
 
 ### Step 4: Debug and improve your implementation
 
